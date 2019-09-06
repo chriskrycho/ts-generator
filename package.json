@@ -10,16 +10,34 @@
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "prettier": "^1.18.2",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.2.0",
     "typescript": "^3.6.2"
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "format": "prettier --write src 'src/**/*'"
+    "format": "prettier --write src 'src/**/*'",
+    "lint": "eslint --ext .js,.ts src"
   },
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/@typescript-eslint"
+    ]
   }
 }
