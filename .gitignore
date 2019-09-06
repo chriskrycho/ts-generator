@@ -1,3 +1,7 @@
+# Never commit generated output
+dist
+index.d.ts
+index.d.ts.map
 
 # Created by https://www.gitignore.io/api/node,code,webstorm,intellij
 # Edit at https://www.gitignore.io/?templates=node,code,webstorm,intellij
