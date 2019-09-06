@@ -12,6 +12,6 @@
     "typescript": "^3.6.2"
   },
   "files": [
-    "dist/index.js"
+    "dist"
   ]
 }
