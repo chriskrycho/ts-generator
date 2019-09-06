@@ -9,9 +9,17 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "prettier": "^1.18.2",
     "typescript": "^3.6.2"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "scripts": {
+    "format": "prettier --write src 'src/**/*'"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
 }
