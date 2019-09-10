@@ -9,6 +9,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/preset-typescript": "^7.6.0",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
     "eslint": "^6.3.0",
@@ -26,7 +27,9 @@
   "scripts": {
     "format": "prettier --write src 'src/**/*'",
     "lint": "eslint --ext .js,.ts src",
+    "build:js": "babel src -d dist --extensions '.ts'",
     "build:types": "tsc",
+    "clean:js": "rimraf dist/*",
     "clean:types": "rimraf index.d.ts index.d.ts.map",
     "build": "yarn build:types"
   },
