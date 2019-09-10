@@ -12,6 +12,7 @@
     "@babel/preset-typescript": "^7.6.0",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
+    "concurrently": "^4.1.2",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.2.0",
     "eslint-plugin-prettier": "^3.1.0",
@@ -31,8 +32,10 @@
     "build:types": "tsc",
     "clean:js": "rimraf dist/*",
     "clean:types": "rimraf index.d.ts index.d.ts.map",
-    "build": "npm run build:js && npm run build:types",
-    "clean": "npm run clean:js && npm run clean:types"
+    "build": "concurrently -p \"[{name}]\" -n \"TYPES,BABEL,LINTS\" -c \"bgBlue.white.bold,bgYellow.black.bold,bgMagenta.white.bold\" \"npm run build:types\" \"npm run build:js\" \"npm run lint\"",
+    "clean": "concurrently -p \"[{name}]\" -n \"TYPES,BABEL\" -c \"bgBlue.white.bold,bgYellow.black.bold\"  \"npm run clean:js\" \"npm run clean:types\"",
+    "pretest": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "prettier": {
     "singleQuote": true,
