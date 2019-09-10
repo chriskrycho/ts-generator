@@ -31,7 +31,8 @@
     "build:types": "tsc",
     "clean:js": "rimraf dist/*",
     "clean:types": "rimraf index.d.ts index.d.ts.map",
-    "build": "yarn build:types"
+    "build": "npm run build:js && npm run build:types",
+    "clean": "npm run clean:js && npm run clean:types"
   },
   "prettier": {
     "singleQuote": true,
