@@ -16,6 +16,7 @@
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.2.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "npm-watch": "^0.6.0",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "typescript": "^3.6.2"
@@ -27,15 +28,37 @@
   ],
   "scripts": {
     "format": "prettier --write src 'src/**/*'",
-    "lint": "eslint --ext .js,.ts src",
-    "build:js": "babel src -d dist --extensions '.ts'",
+    "lint": "eslint --fix --ext .js,.ts src",
+    "build:js": "babel src --out-dir dist --extensions '.ts'",
     "build:types": "tsc",
     "clean:js": "rimraf dist/*",
     "clean:types": "rimraf index.d.ts index.d.ts.map",
-    "build": "concurrently -p \"[{name}]\" -n \"TYPES,BABEL,LINTS\" -c \"bgBlue.white.bold,bgYellow.black.bold,bgMagenta.white.bold\" \"npm run build:types\" \"npm run build:js\" \"npm run lint\"",
-    "clean": "concurrently -p \"[{name}]\" -n \"TYPES,BABEL\" -c \"bgBlue.white.bold,bgYellow.black.bold\"  \"npm run clean:js\" \"npm run clean:types\"",
+    "build": "concurrently --names \"TYPES,BABEL,LINTS\" --prefix \"[{name}]\" --prefix-colors \"bgBlue.white.bold,bgYellow.black.bold,bgMagenta.white.bold\" \"npm run build:types\" \"npm run build:js\" \"npm run lint\"",
+    "clean": "concurrently --names \"TYPES,BABEL\" --prefix \"[{name}]\" --prefix-colors \"bgBlue.white.bold,bgYellow.black.bold\"  \"npm run clean:js\" \"npm run clean:types\"",
     "pretest": "npm run build",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "watch:js": "babel --watch src --out-dir dist --extensions '.ts'",
+    "watch:types": "npm-watch build:types",
+    "watch:lint": "npm-watch lint",
+    "watch": "concurrently --names \"TYPES,BABEL,LINTS\" --prefix \"[{name}]\" --prefix-colors \"bgBlue.white.bold,bgYellow.black.bold,bgMagenta.white.bold\" \"npm run watch:types\" \"npm run watch:js\" \"npm run watch:lint\""
+  },
+  "watch": {
+    "lint": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts",
+      "quiet": true,
+      "clearBuffer": false
+    },
+    "build:types": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts",
+      "quiet": true,
+      "clearBuffer": false
+    }
   },
   "prettier": {
     "singleQuote": true,
